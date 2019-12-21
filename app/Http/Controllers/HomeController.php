@@ -12,7 +12,7 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {   //esta funcion se ejecuta  primero, verifica que tenga sesion inciada
         $this->middleware('auth');
     }
 
