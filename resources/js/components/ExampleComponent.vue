@@ -5,10 +5,17 @@
             <div class="card-header">Componente de prueb 32412341</div>
 
             <div class="card-body">
-                I'm an example component1.fasdfasdfsdf 
+                <div class="animated bounce faster">Example</div>
             </div>
         </div>
+         <h1 class="animated infinite shake">Animación shake <i class="fas fa-adjust"></i></h1>
+
+
+
+            
     </div>
+
+
         
 </template>
 

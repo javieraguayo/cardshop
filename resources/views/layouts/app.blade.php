@@ -47,8 +47,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
+
+                                <li class="nav-item active">
+                                    <a class="nav-link"><span class="sr-only">(current)</span></a>
+                                </li>
                             @endif
                         @else
+                        <div class="row align-items-end">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -66,6 +71,14 @@
                                     </form>
                                 </div>
                             </li>
+
+                            <li class="nav-item active">
+                                     <a class="btn btn-primary btn-sm ml-3" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                        <i class="fa fa-shopping-cart"></i> Cart
+                                        <span class="badge badge-light">3</span>
+                                    </a>
+                            </li>
+                        <div>
                         @endguest
                     </ul>
                 </div>
