@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::select('name','price')->get();
+        return Product::select('name','price','url_img')->get();
     }
 
     /**

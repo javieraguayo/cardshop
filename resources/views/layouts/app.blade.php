@@ -18,13 +18,28 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        .badge {
+        background-color: #6394F8;
+            border-radius: 10px;
+            color: white;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1;
+            padding: 3px 7px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'CartShop') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -53,7 +68,10 @@
                                 </li>
                             @endif
                         @else
-                        <div class="row align-items-end">
+                        <menu-auth-component auth="{{ Auth::user()->name }}"></menu-auth-component>
+
+                        {{-- <div class="row align-items-end">
+                            <li><a href="#" id="cart" class="nav-link"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -70,15 +88,8 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
-
-                            <li class="nav-item active">
-                                     <a class="btn btn-primary btn-sm ml-3" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                        <i class="fa fa-shopping-cart"></i> Cart
-                                        <span class="badge badge-light">3</span>
-                                    </a>
-                            </li>
-                        <div>
+                            </li>  
+                        <div> --}}
                         @endguest
                     </ul>
                 </div>
