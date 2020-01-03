@@ -1,8 +1,8 @@
 <!-- Componente de la carta-->
 <template>
     
-       <div class="card pt-2" style="width: 18rem;">
-          <img :src="card.url_img" class="card-img-top animated zoomIn" alt="...">
+       <div class="card px-3 py-3" style="width: 18rem;">
+          <img :src="card.url_img" class="card-img-top animated zoomIn" alt="..." >
           <div class="card-body">
             <h5 class="card-title">{{ card.name }}</h5>
             <p class="card-text">Descripcion</p>

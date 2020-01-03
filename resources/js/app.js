@@ -25,7 +25,7 @@ Vue.component('cartgeneral-component', require('./components/CartGeneralComponen
 //card carta 
 Vue.component('card-component', require('./components/CardComponent.vue').default);
 //componente que contiene for de cartas
-Vue.component('general-list-component', require('./components/GeneralCartListComponent.vue').default);
+Vue.component('general-list-component', require('./components/GeneralCardListComponent.vue').default);
 //componente de carro unidad
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
 //Menu logout y carro btn show cart
