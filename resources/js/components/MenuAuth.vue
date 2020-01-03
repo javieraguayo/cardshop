@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row align-items-end">
-            <li><a href="#" id="cart" class="nav-link" data-toggle="modal" data-target="#modalcart"><i class="fa fa-shopping-cart" ></i> Cart <span class="badge">3</span></a></li>
+            <li><a href="#" id="cart" class="nav-link" data-toggle="modal" data-target="#modalcart"><i class="fa fa-shopping-cart" ></i> Carrito <span class="badge">3</span></a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    {{this.auth}}<span class="caret"></span>
