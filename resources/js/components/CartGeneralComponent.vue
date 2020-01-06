@@ -21,7 +21,7 @@
                 </tr>
               </thead>
               <tbody>
-                <cart-component></cart-component>
+                <cart-component v-for="(product, index) in products" :key="product.id" :product="product"></cart-component>
                 
 
                 
@@ -36,13 +36,36 @@
 
 <script>
     export default {
+        data(){//datos del componente
+            return{//
+                products : [],
+                EmptyCart : false,
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
+
+            axios.get('./Cart')
+            .then((response) =>{
+            let validatempty  = response.data.length;
+
+            if (validatempty > 0) {
+              this.products = response.data;//lleno notas 
+              console.log(this.products[0].name);
+              console.log(this.products[0].price);
+            }
+            
+            })
+            .catch(function (error) {
+            console.log('ocurrio un error');
+            console.log(error);
+            })
+            .finally(function () {
+            // always executed
+            });
         },
         methods: {
-        MostrarCarro: function (event) {
-          
-        }
+         
     }
-    }
+}
 </script>

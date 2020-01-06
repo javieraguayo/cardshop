@@ -4,7 +4,7 @@
        <div class="card px-3 py-3" style="width: 18rem;">
           <div  class="img">
             <img :src="card.url_img" class="card-img-top animated zoomIn" alt="..." >
-            <a href=""><span class="fas fa-search-plus fa-5x text-secondary"></span></a>
+            <a><span class="fas fa-search-plus fa-5x text-secondary"></span></a>
           </div>
           
           
@@ -13,7 +13,7 @@
             <p class="card-text">Descripcion</p>
             <strong class="card-text">{{ card.price }}</strong>
             <hr>
-            <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Añadir al carro</a>
+            <button class="btn btn-primary" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
             <!-- <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Favoritos</a> -->
           </div>
         </div>
@@ -30,9 +30,35 @@
             };  
         },
         mounted() {
-            console.log('CardComponent mounted.')
-
+            console.log('CardComponent mounted.');
+            
+        },
+        created(){
+           
+        },
+         methods: {
+           addProduct: function (card) {
+            
+            console.log(JSON.stringify(card))
+            
+           
+            axios.post('./Cart', card)
+            .then((response) =>{
+            
+            })
+            .catch(function (error) {
+            console.log('ocurrio un error');
+            console.log(error);
+            })
+            .finally(function () {
+            // always executed
+            console.log('siempre se ejecuta')
+            });
+             // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
+          // `this` inside methods points to the Vue instance
+          
         }
+      }
     }
 </script>
 <style>

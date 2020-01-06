@@ -21,4 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/product', 'ProductController@index')->name('product');
 
+
+Route::resource('Product', 'ProductController');
+Route::resource('Cart', 'CartController');
 // Route::get('/logout', 'LoginController@logout')->name('logout');

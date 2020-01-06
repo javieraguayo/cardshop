@@ -17,11 +17,9 @@
         mounted() {
             //para hacer una consulta ajax a un controlador 
             //basado en promesas 
-            axios.get('./product')
+            axios.get('./Product')
             .then((response) =>{
             this.cards = response.data;//lleno notas 
-            console.log(this.cards[0].name);
-            console.log(this.cards[0].price);
             })
             .catch(function (error) {
             console.log('ocurrio un error');

@@ -1873,6 +1873,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('CardComponent mounted.');
+  },
+  created: function created() {},
+  methods: {
+    addProduct: function addProduct(card) {
+      console.log(JSON.stringify(card));
+      axios.post('./Cart', card).then(function (response) {})["catch"](function (error) {
+        console.log('ocurrio un error');
+        console.log(error);
+      })["finally"](function () {
+        // always executed
+        console.log('siempre se ejecuta');
+      }); // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
+      // `this` inside methods points to the Vue instance
+    }
   }
 });
 
@@ -1908,6 +1922,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['product'],
+  data: function data() {
+    //datos del componentes
+    return {
+      //
+      cards: []
+    };
+  },
   mounted: function mounted() {
     console.log('Component CartComponent.');
   }
@@ -1961,12 +1983,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    //datos del componente
+    return {
+      //
+      products: [],
+      EmptyCart: false
+    };
   },
-  methods: {
-    MostrarCarro: function MostrarCarro(event) {}
-  }
+  mounted: function mounted() {
+    var _this = this;
+
+    // console.log('Component mounted.')
+    axios.get('./Cart').then(function (response) {
+      var validatempty = response.data.length;
+
+      if (validatempty > 0) {
+        _this.products = response.data; //lleno notas 
+
+        console.log(_this.products[0].name);
+        console.log(_this.products[0].price);
+      }
+    })["catch"](function (error) {
+      console.log('ocurrio un error');
+      console.log(error);
+    })["finally"](function () {// always executed
+    });
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -2024,11 +2068,8 @@ __webpack_require__.r(__webpack_exports__);
 
     //para hacer una consulta ajax a un controlador 
     //basado en promesas 
-    axios.get('./product').then(function (response) {
+    axios.get('./Product').then(function (response) {
       _this.cards = response.data; //lleno notas 
-
-      console.log(_this.cards[0].name);
-      console.log(_this.cards[0].price);
     })["catch"](function (error) {
       console.log('ocurrio un error');
       console.log(error);
@@ -6642,7 +6683,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
 
 // exports
 
@@ -38162,7 +38203,21 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _vm._m(1)
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                return _vm.addProduct(_vm.card)
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "fas fa-plus icon_btn_add" }),
+            _vm._v(" Agregar")
+          ]
+        )
       ])
     ]
   )
@@ -38172,17 +38227,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "" } }, [
+    return _c("a", [
       _c("span", { staticClass: "fas fa-search-plus fa-5x text-secondary" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-plus" }),
-      _vm._v(" Añadir al carro")
     ])
   }
 ]
@@ -38207,50 +38253,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("tr", [
+    _c("th", { staticClass: "border-0" }, [
+      _c("div", [
+        _c("img", {
+          staticClass: "img-fluid rounded shadow-sm",
+          attrs: { src: _vm.product.url_img, alt: "", width: "70" }
+        }),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "ml-3 align-middle  .d-none .d-lg-block .d-xl-none"
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "border-0 align-middle" }, [
+      _c("strong", [_vm._v(_vm._s(_vm.product.name))])
+    ]),
+    _vm._v(" "),
+    _c("td", { staticClass: "border-0 align-middle" }, [
+      _c("strong", [_vm._v("$" + _vm._s(_vm.product.price))])
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", { staticClass: "border-0" }, [
-        _c("div", [
-          _c("img", {
-            staticClass: "img-fluid rounded shadow-sm",
-            attrs: {
-              src: "https://optcg.com/1354-product_default/orcus.jpg",
-              alt: "",
-              width: "70"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "ml-3 align-middle  .d-none .d-lg-block .d-xl-none"
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "border-0 align-middle" }, [
-        _c("strong", [_vm._v("ORCUS")])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "border-0 align-middle" }, [
-        _c("strong", [_vm._v("$2.500")])
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "border-0 align-middle" }, [
-        _c("input", {
-          staticClass: "form-control input-sm",
-          attrs: { type: "number", value: "1" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "border-0 align-middle" }, [
-        _c("a", { staticClass: "text-danger", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fa fa-trash" })
-        ])
+    return _c("td", { staticClass: "border-0 align-middle" }, [
+      _c("input", {
+        staticClass: "form-control input-sm",
+        attrs: { type: "number", value: "1" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "border-0 align-middle" }, [
+      _c("a", { staticClass: "text-danger", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-trash" })
       ])
     ])
   }
@@ -38280,7 +38328,16 @@ var render = function() {
     _c("table", { staticClass: "table" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("tbody", [_c("cart-component")], 1)
+      _c(
+        "tbody",
+        _vm._l(_vm.products, function(product, index) {
+          return _c("cart-component", {
+            key: product.id,
+            attrs: { product: product }
+          })
+        }),
+        1
+      )
     ])
   ])
 }

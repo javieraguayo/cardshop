@@ -3,58 +3,70 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;//para que pueda usar el modelo de la Producto
+use App\Cart;//para que pueda usar el modelo cart
 use Illuminate\Support\Str;
+use Illuminate \ Support \ Facades \ Auth;//para obtener datos del user
 
-class ProductController extends Controller
+class CartController extends Controller
 {   
-      public function __construct()
+
+    public function __construct()
     {
         //para acceder al controller tiene que estar autenticado 
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
-
-
     /**
      * Display a listing of the resource.
-     * GET listar todos los productos
+     * Listado de productos del usuario (user_id)en el carrito de compra
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Product::select('name','price','url_img','token')->get();
+       
+        $user_id = Auth::id();//variable del usuario que inicia session
+       //Elocuent query trae los productos dentro del carrito(table carts) del usuario que inicio session
+        $carts = Cart::select('products.name','products.price','products.url_img','products.token')
+                ->join('products', 'products.id', '=', 'carts.product_id')
+                ->join('users', 'users.id', '=', 'carts.user_id')
+                ->where('users.id', $user_id)
+                ->get();
+
+        return $carts;
+    
     }
 
     /**
      * Show the form for creating a new resource.
-     * GET para mostar la vista del crear y sus datos
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        
+        //
     }
 
     /**
      * Store a newly created resource in storage.
-     * POST guardar todos los productos
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {   
+        $user_id = Auth::id();
 
-        $producto = new Product();
-        $producto->name = $request->name;
-        $producto->price = $request->price;
-        $producto->url_img = $request->url_img;
-        $producto->token = Str::random(32);
-        $producto->save();
+
+        $cart = new Cart();
+        $cart->user_id = $user_id;
+        $cart->product_id = "1";
+        $cart->quantity = 1;
+        
+        $cart->save();
     }
 
     /**
      * Display the specified resource.
-     * GET para mostrar un producto
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -65,7 +77,7 @@ class ProductController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * GET muestra el formulario del update
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +88,7 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * //PUT actualiza el producto
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -88,7 +100,7 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * //DELETE elimina el producto
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

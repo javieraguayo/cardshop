@@ -18,7 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->string('url_img');
+            $table->string('token', 32)->unique();
             $table->timestamps();
+
         });
     }
 
