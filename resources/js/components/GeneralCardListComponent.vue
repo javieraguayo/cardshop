@@ -1,7 +1,7 @@
 <!-- Este componente lista las cartas en el home-->
 <template>
     <div class="row justify-content-end">
-        <card-component v-for="(card, index) in cards" :key="cards.id" :card="card" class="col-12 col-md-3 ml-1 my-1" >
+        <card-component v-for="(card, index) in cards" :key="cards.id" :card="card" class="col-12 col-md-3 ml-1 my-1">
         </card-component>
     </div> 
 </template>
@@ -28,6 +28,14 @@
             .finally(function () {
             // always executed
             });
+        },
+         methods:{
+            updatecart(card){ 
+                this.cards.push(card);
+                console.log("llego al padre");
+            }
+            
         }
+    
     }
 </script>

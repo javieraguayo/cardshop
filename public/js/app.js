@@ -1877,8 +1877,15 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {},
   methods: {
     addProduct: function addProduct(card) {
-      console.log(JSON.stringify(card));
-      axios.post('./Cart', card).then(function (response) {})["catch"](function (error) {
+      var _this = this;
+
+      // console.log(JSON.stringify(card))
+      axios.post('./Cart', card).then(function (response) {
+        // this.$emit('updatecart',card);
+        console.log('llego al then');
+
+        _this.$root.$emit('updatecart', card);
+      })["catch"](function (error) {
         console.log('ocurrio un error');
         console.log(error);
       })["finally"](function () {
@@ -1901,6 +1908,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -1995,22 +2003,31 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // console.log('Component mounted.')
-    axios.get('./Cart').then(function (response) {
-      var validatempty = response.data.length;
-
-      if (validatempty > 0) {
-        _this.products = response.data; //lleno notas 
-
-        console.log(_this.products[0].name);
-        console.log(_this.products[0].price);
-      }
-    })["catch"](function (error) {
-      console.log('ocurrio un error');
-      console.log(error);
-    })["finally"](function () {// always executed
+    this.getAllData();
+    this.$root.$on('updatecart', function (card) {
+      _this.getAllData();
     });
   },
-  methods: {}
+  methods: {
+    getAllData: function getAllData() {
+      var _this2 = this;
+
+      axios.get('./Cart').then(function (response) {
+        var validatempty = response.data.length;
+
+        if (validatempty > 0) {
+          _this2.products = response.data; //lleno notas 
+
+          console.log(_this2.products[0].name);
+          console.log(_this2.products[0].price);
+        }
+      })["catch"](function (error) {
+        console.log('ocurrio un error');
+        console.log(error);
+      })["finally"](function () {// always executed
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2075,6 +2092,12 @@ __webpack_require__.r(__webpack_exports__);
       console.log(error);
     })["finally"](function () {// always executed
     });
+  },
+  methods: {
+    updatecart: function updatecart(card) {
+      this.cards.push(card);
+      console.log("llego al padre");
+    }
   }
 });
 
@@ -6683,7 +6706,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
 
 // exports
 

@@ -44,8 +44,14 @@
         },
         mounted() {
             // console.log('Component mounted.')
-
-            axios.get('./Cart')
+            this.getAllData();
+            this.$root.$on('updatecart', card => {
+             this.getAllData();
+            });  
+        },
+        methods: {
+          getAllData: function () {
+              axios.get('./Cart')
             .then((response) =>{
             let validatempty  = response.data.length;
 
@@ -63,9 +69,7 @@
             .finally(function () {
             // always executed
             });
+          }
         },
-        methods: {
-         
-    }
 }
 </script>

@@ -15,7 +15,8 @@
             <td class="border-0 align-middle"> <input class="form-control input-sm" type="number" value="1"></td>
             <td class="border-0 align-middle"><a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
         </tr>
-     
+            
+
 </template>
 
 <script>
@@ -29,7 +30,6 @@
         },
         mounted() {
             console.log('Component CartComponent.')
-
             
         }
     }

@@ -39,12 +39,14 @@
          methods: {
            addProduct: function (card) {
             
-            console.log(JSON.stringify(card))
+            // console.log(JSON.stringify(card))
             
            
             axios.post('./Cart', card)
             .then((response) =>{
-            
+                // this.$emit('updatecart',card);
+                console.log('llego al then');
+                this.$root.$emit('updatecart', card);
             })
             .catch(function (error) {
             console.log('ocurrio un error');

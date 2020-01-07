@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cart;//para que pueda usar el modelo cart
 use Illuminate\Support\Str;
 use Illuminate \ Support \ Facades \ Auth;//para obtener datos del user
+use App\Product;
 
 class CartController extends Controller
 {   
@@ -53,12 +54,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $user_id = Auth::id();
+        $token = $request->token;
+        //buscamos el producto con el token y traemos el id del producto
+        $id_product = Product::select('id','name')
+                              ->where('token', $token)
+                              ->get();
 
-
+        // echo var_dump($id_product[0]->id);
+        //guardamos el producto en la bd
         $cart = new Cart();
         $cart->user_id = $user_id;
-        $cart->product_id = "1";
+        $cart->product_id = $id_product[0]->id;
         $cart->quantity = 1;
         
         $cart->save();
