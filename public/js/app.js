@@ -1981,22 +1981,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     //datos del componente
     return {
       //
       products: [],
-      EmptyCart: false
+      EmptyCart: false,
+      count: 0
     };
   },
   mounted: function mounted() {
@@ -2006,6 +1998,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getAllData();
     this.$root.$on('updatecart', function (card) {
       _this.getAllData();
+
+      console.log(card);
     });
   },
   methods: {
@@ -2020,6 +2014,8 @@ __webpack_require__.r(__webpack_exports__);
 
           console.log(_this2.products[0].name);
           console.log(_this2.products[0].price);
+
+          _this2.$root.$emit('countproduct', _this2.products);
         }
       })["catch"](function (error) {
         console.log('ocurrio un error');
@@ -2143,11 +2139,18 @@ __webpack_require__.r(__webpack_exports__);
   //si el objeto viene de un componente exterior no hay que definirlo en la data
   data: function data() {
     //datos del componente
-    return {//
+    return {
+      //
+      count: 0
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     console.log('MenuComponent mounted.');
+    this.$root.$on('countproduct', function (products) {
+      _this.count = products.length;
+    });
   },
   methods: {
     logout: function logout() {
@@ -38298,23 +38301,18 @@ var render = function() {
       _c("strong", [_vm._v("$" + _vm._s(_vm.product.price))])
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("td", { staticClass: "border-0 align-middle" }, [
+      _c("input", {
+        staticClass: "form-control input-sm",
+        attrs: { type: "number" },
+        domProps: { value: _vm.product.quantity }
+      })
+    ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border-0 align-middle" }, [
-      _c("input", {
-        staticClass: "form-control input-sm",
-        attrs: { type: "number", value: "1" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -38499,7 +38497,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row align-items-end" }, [
-      _vm._m(0),
+      _c("li", [
+        _c(
+          "a",
+          {
+            staticClass: "nav-link",
+            attrs: {
+              href: "#",
+              id: "cart",
+              "data-toggle": "modal",
+              "data-target": "#modalcart"
+            }
+          },
+          [
+            _c("i", { staticClass: "fa fa-shopping-cart" }),
+            _vm._v(" Carrito "),
+            _c("span", { staticClass: "badge" }, [
+              _vm._v(" " + _vm._s(this.count))
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c("li", { staticClass: "nav-item dropdown" }, [
         _c(
@@ -38548,32 +38566,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link",
-          attrs: {
-            href: "#",
-            id: "cart",
-            "data-toggle": "modal",
-            "data-target": "#modalcart"
-          }
-        },
-        [
-          _c("i", { staticClass: "fa fa-shopping-cart" }),
-          _vm._v(" Carrito "),
-          _c("span", { staticClass: "badge" }, [_vm._v("3")])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

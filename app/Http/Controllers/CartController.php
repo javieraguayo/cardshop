@@ -14,7 +14,7 @@ class CartController extends Controller
     public function __construct()
     {
         //para acceder al controller tiene que estar autenticado 
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class CartController extends Controller
        
         $user_id = Auth::id();//variable del usuario que inicia session
        //Elocuent query trae los productos dentro del carrito(table carts) del usuario que inicio session
-        $carts = Cart::select('products.name','products.price','products.url_img','products.token')
+        $carts = Cart::select('products.name','products.price','products.url_img','products.token','carts.quantity')
                 ->join('products', 'products.id', '=', 'carts.product_id')
                 ->join('users', 'users.id', '=', 'carts.user_id')
                 ->where('users.id', $user_id)
@@ -48,7 +48,8 @@ class CartController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+       Funcion Store usada para boton agregar del cardComponent agregra de +1 productos  
+     * recibe por parametros el token del producto , con el token buscamos el producto traemos su id y lo insertamos en la tabla carts 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -58,18 +59,31 @@ class CartController extends Controller
         $user_id = Auth::id();
         $token = $request->token;
         //buscamos el producto con el token y traemos el id del producto
-        $id_product = Product::select('id','name')
-                              ->where('token', $token)
-                              ->get();
+        $id_product = Product::select('id')
+                    ->where('token', $token)
+                    ->get();
 
-        // echo var_dump($id_product[0]->id);
-        //guardamos el producto en la bd
-        $cart = new Cart();
-        $cart->user_id = $user_id;
-        $cart->product_id = $id_product[0]->id;
-        $cart->quantity = 1;
+        $cart       = Cart::select('id','quantity')
+                    ->where('product_id', $id_product[0]->id)
+                    ->where('user_id', $user_id)
+                    ->first();
+      
+        //verificamos el arreglo si esta vacio
+        if (is_null($cart)) {
+            // guardamos el producto en la bd
+            $createcart = new Cart();
+            $createcart->user_id = $user_id;
+            $createcart->product_id = $id_product[0]->id;
+            $createcart->quantity = 1;
+            $createcart->save();
+             
+        }else{//si existe editamos la row
+            //editamos el producto de la tabla cart
+            $updatecart = Cart::find($cart->id);
+            $updatecart->quantity = $cart->quantity + 1;
+            $updatecart->save();
+        }
         
-        $cart->save();
     }
 
     /**

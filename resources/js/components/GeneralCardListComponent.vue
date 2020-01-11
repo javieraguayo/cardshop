@@ -20,6 +20,7 @@
             axios.get('./Product')
             .then((response) =>{
             this.cards = response.data;//lleno notas 
+            
             })
             .catch(function (error) {
             console.log('ocurrio un error');
