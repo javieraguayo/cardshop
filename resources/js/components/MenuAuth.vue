@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row align-items-end">
-            <li><a href="#" id="cart" class="nav-link" data-toggle="modal" data-target="#modalcart"><i class="fa fa-shopping-cart" ></i> Carrito <span class="badge"> {{this.count}}</span></a></li>
+            <li><a href="#" id="cart" class="nav-link" data-toggle="modal" data-target="#modalcart"><i class="fa fa-shopping-cart" ></i> Carrito <span class="badge">{{totalAmount()}}</span></a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    {{this.auth}}<span class="caret"></span>
@@ -29,15 +29,20 @@
         //si el objeto viene de un componente exterior no hay que definirlo en la data
         data(){//datos del componente
             return{//
-              count : 0
+              count : 0,
+              products : [],
             };  
         },
         mounted() {
             console.log('MenuComponent mounted.')
             this.$root.$on('countproduct', products => {
-             this.count = products.length;
+            this.products = products;
+
 
             });  
+        },
+        computed: {
+                
         },
         methods: {
               logout:function(){
@@ -51,6 +56,13 @@
                 }).catch(error => {
 
               });
+        },
+        totalAmount: function () {
+                    var sum = 0;
+                    this.products.forEach(e => {
+                        sum += e.quantity;
+                    });
+                    return sum
         },
     }
 }

@@ -30,8 +30,7 @@
         data(){//datos del componente
             return{//
                 products : [],
-                EmptyCart : false,
-                count: 0
+                EmptyCart : false
             }
         },
         mounted() {

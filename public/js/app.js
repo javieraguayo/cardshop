@@ -1860,6 +1860,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['card'],
   //datos que llegan de otro componente
@@ -1987,8 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       //
       products: [],
-      EmptyCart: false,
-      count: 0
+      EmptyCart: false
     };
   },
   mounted: function mounted() {
@@ -2141,7 +2145,8 @@ __webpack_require__.r(__webpack_exports__);
     //datos del componente
     return {
       //
-      count: 0
+      count: 0,
+      products: []
     };
   },
   mounted: function mounted() {
@@ -2149,9 +2154,10 @@ __webpack_require__.r(__webpack_exports__);
 
     console.log('MenuComponent mounted.');
     this.$root.$on('countproduct', function (products) {
-      _this.count = products.length;
+      _this.products = products;
     });
   },
+  computed: {},
   methods: {
     logout: function logout() {
       axios.post('./logout').then(function (response) {
@@ -2160,6 +2166,13 @@ __webpack_require__.r(__webpack_exports__);
         } else {// throw error and go to catch block
         }
       })["catch"](function (error) {});
+    },
+    totalAmount: function totalAmount() {
+      var sum = 0;
+      this.products.forEach(function (e) {
+        sum += e.quantity;
+      });
+      return sum;
     }
   }
 });
@@ -6709,7 +6722,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
 
 // exports
 
@@ -38216,7 +38229,7 @@ var render = function() {
         _vm._m(0)
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body d-flex flex-column" }, [
         _c("h5", { staticClass: "card-title" }, [
           _vm._v(_vm._s(_vm.card.name))
         ]),
@@ -38232,7 +38245,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary",
+            staticClass: "btn btn-primary mt-auto",
             on: {
               click: function($event) {
                 return _vm.addProduct(_vm.card)
@@ -38318,9 +38331,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", { staticClass: "border-0 align-middle" }, [
-      _c("a", { staticClass: "text-danger", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-trash" })
-      ])
+      _c(
+        "a",
+        { staticClass: "text-danger", attrs: { href: "#", title: "Eliminar" } },
+        [_c("i", { staticClass: "fa fa-trash" })]
+      )
     ])
   }
 ]
@@ -38513,7 +38528,7 @@ var render = function() {
             _c("i", { staticClass: "fa fa-shopping-cart" }),
             _vm._v(" Carrito "),
             _c("span", { staticClass: "badge" }, [
-              _vm._v(" " + _vm._s(this.count))
+              _vm._v(_vm._s(_vm.totalAmount()))
             ])
           ]
         )

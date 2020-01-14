@@ -50,6 +50,8 @@ class ProductController extends Controller
         $producto->url_img = $request->url_img;
         $producto->token = Str::random(32);
         $producto->save();
+
+        return view('home');
     }
 
     /**

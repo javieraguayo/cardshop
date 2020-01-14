@@ -6,14 +6,19 @@
             <img :src="card.url_img" class="card-img-top animated zoomIn" alt="..." >
             <a><span class="fas fa-search-plus fa-5x text-secondary"></span></a>
           </div>
+          <!-- //alinear botones a multiples pantallas
+             You can use the following Bootstrap 4 modifier classes:
+             Add d-flex to .card-body
+             Add flex-column to .card-body
+             Add mt-auto to .btn nested in .card-body
+            -->
           
-          
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ card.name }}</h5>
             <p class="card-text">Descripcion</p>
             <strong class="card-text">{{ card.price }}</strong>
             <hr>
-            <button class="btn btn-primary" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
+            <button class="btn btn-primary mt-auto" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
             <!-- <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Favoritos</a> -->
           </div>
         </div>

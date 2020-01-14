@@ -13,7 +13,7 @@
             <td class="border-0 align-middle"><strong>{{ product.name }}</strong></td>
             <td class="border-0 align-middle"><strong>${{ product.price }}</strong></td>
             <td class="border-0 align-middle"> <input class="form-control input-sm" type="number" :value="product.quantity"></td>
-            <td class="border-0 align-middle"><a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+            <td class="border-0 align-middle"><a href="#" class="text-danger" title="Eliminar"><i class="fa fa-trash"></i></a></td>
         </tr>
             
 
