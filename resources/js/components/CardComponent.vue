@@ -35,7 +35,7 @@
             };  
         },
         mounted() {
-            console.log('CardComponent mounted.');
+            
             
         },
         created(){
@@ -54,12 +54,11 @@
                 this.$root.$emit('updatecart', card);
             })
             .catch(function (error) {
-            console.log('ocurrio un error');
-            console.log(error);
+          
+      
             })
             .finally(function () {
-            // always executed
-            console.log('siempre se ejecuta')
+          
             });
              // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
           // `this` inside methods points to the Vue instance

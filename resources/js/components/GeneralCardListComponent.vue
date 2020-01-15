@@ -33,7 +33,6 @@
          methods:{
             updatecart(card){ 
                 this.cards.push(card);
-                console.log("llego al padre");
             }
             
         }

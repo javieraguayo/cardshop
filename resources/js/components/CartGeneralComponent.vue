@@ -34,11 +34,10 @@
             }
         },
         mounted() {
-            // console.log('Component mounted.')
             this.getAllData();
             this.$root.$on('updatecart', card => {
              this.getAllData();
-             console.log(card);
+             // console.log(card);
             });  
         },
         methods: {
@@ -49,15 +48,11 @@
 
             if (validatempty > 0) {
               this.products = response.data;//lleno notas 
-              console.log(this.products[0].name);
-              console.log(this.products[0].price);
               this.$root.$emit('countproduct', this.products);
             }
             
             })
             .catch(function (error) {
-            console.log('ocurrio un error');
-            console.log(error);
             })
             .finally(function () {
             // always executed
