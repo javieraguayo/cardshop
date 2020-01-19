@@ -34,9 +34,9 @@
         }
     </style>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body style="padding-top: 60px;">
+    <div id="app"><!-- navbar-expand-md-->
+        <nav class="navbar navbar-expand fixed-top navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'CartShop') }}
@@ -69,27 +69,6 @@
                             @endif
                         @else
                         <menu-auth-component auth="{{ Auth::user()->name }}"></menu-auth-component>
-
-                        {{-- <div class="row align-items-end">
-                            <li><a href="#" id="cart" class="nav-link"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>  
-                        <div> --}}
                         @endguest
                     </ul>
                 </div>

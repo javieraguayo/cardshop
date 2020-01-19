@@ -35,7 +35,7 @@
         },
         mounted() {
             this.getAllData();
-            this.$root.$on('updatecart', card => {
+            this.$root.$on('updatecart', card => {//no recomendado para apps grandes
              this.getAllData();
              // console.log(card);
             });  
