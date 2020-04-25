@@ -1876,11 +1876,13 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false
     };
   },
-  mounted: function mounted() {
-    console.log('CardComponent mounted.');
-  },
+  mounted: function mounted() {},
   created: function created() {},
   methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
     addProduct: function addProduct(card) {
       var _this = this;
 
@@ -1890,13 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log('llego al then');
 
         _this.$root.$emit('updatecart', card);
-      })["catch"](function (error) {
-        console.log('ocurrio un error');
-        console.log(error);
-      })["finally"](function () {
-        // always executed
-        console.log('siempre se ejecuta');
-      }); // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
+      })["catch"](function (error) {})["finally"](function () {}); // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
       // `this` inside methods points to the Vue instance
     }
   }
@@ -1945,6 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('Component CartComponent.');
+  },
+  methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
   }
 });
 
@@ -1998,12 +2000,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    // console.log('Component mounted.')
     this.getAllData();
     this.$root.$on('updatecart', function (card) {
-      _this.getAllData();
+      _this.getAllData(); // console.log(card);
 
-      console.log(card);
     });
   },
   methods: {
@@ -2016,15 +2016,9 @@ __webpack_require__.r(__webpack_exports__);
         if (validatempty > 0) {
           _this2.products = response.data; //lleno notas 
 
-          console.log(_this2.products[0].name);
-          console.log(_this2.products[0].price);
-
           _this2.$root.$emit('countproduct', _this2.products);
         }
-      })["catch"](function (error) {
-        console.log('ocurrio un error');
-        console.log(error);
-      })["finally"](function () {// always executed
+      })["catch"](function (error) {})["finally"](function () {// always executed
       });
     }
   }
@@ -2096,7 +2090,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updatecart: function updatecart(card) {
       this.cards.push(card);
-      console.log("llego al padre");
     }
   }
 });
@@ -6722,7 +6715,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
 
 // exports
 
@@ -38237,7 +38230,7 @@ var render = function() {
         _c("p", { staticClass: "card-text" }, [_vm._v("Descripcion")]),
         _vm._v(" "),
         _c("strong", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.card.price))
+          _vm._v("$" + _vm._s(_vm.formatPrice(_vm.card.price)))
         ]),
         _vm._v(" "),
         _c("hr"),
@@ -38311,7 +38304,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "border-0 align-middle" }, [
-      _c("strong", [_vm._v("$" + _vm._s(_vm.product.price))])
+      _c("strong", [_vm._v("$" + _vm._s(_vm.formatPrice(_vm.product.price)))])
     ]),
     _vm._v(" "),
     _c("td", { staticClass: "border-0 align-middle" }, [
@@ -53766,14 +53759,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!***************************************************!*\
   !*** ./resources/js/components/CardComponent.vue ***!
   \***************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CardComponent_vue_vue_type_template_id_6e4da0f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardComponent.vue?vue&type=template&id=6e4da0f2& */ "./resources/js/components/CardComponent.vue?vue&type=template&id=6e4da0f2&");
 /* harmony import */ var _CardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CardComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _CardComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CardComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CardComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _CardComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CardComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CardComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -53805,7 +53799,7 @@ component.options.__file = "resources/js/components/CardComponent.vue"
 /*!****************************************************************************!*\
   !*** ./resources/js/components/CardComponent.vue?vue&type=script&lang=js& ***!
   \****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

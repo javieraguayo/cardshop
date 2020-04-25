@@ -11,7 +11,7 @@
               </div>
             </th>
             <td class="border-0 align-middle"><strong>{{ product.name }}</strong></td>
-            <td class="border-0 align-middle"><strong>${{ product.price }}</strong></td>
+            <td class="border-0 align-middle"><strong>${{ formatPrice(product.price) }}</strong></td>
             <td class="border-0 align-middle"> <input class="form-control input-sm" type="number" :value="product.quantity"></td>
             <td class="border-0 align-middle"><a href="#" class="text-danger" title="Eliminar"><i class="fa fa-trash"></i></a></td>
         </tr>
@@ -31,6 +31,12 @@
         mounted() {
             console.log('Component CartComponent.')
             
-        }
+        },
+          methods: {
+          formatPrice(value) {
+           let val = (value/1).toFixed(0).replace('.', ',')
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+          }
+      }
     }
 </script>

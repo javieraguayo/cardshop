@@ -16,7 +16,7 @@
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ card.name }}</h5>
             <p class="card-text">Descripcion</p>
-            <strong class="card-text">{{ card.price }}</strong>
+            <strong class="card-text">${{ formatPrice(card.price) }}</strong>
             <hr>
             <button class="btn btn-primary mt-auto" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
             <!-- <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Favoritos</a> -->
@@ -42,7 +42,12 @@
            
         },
          methods: {
-           addProduct: function (card) {
+          formatPrice(value) {
+           let val = (value/1).toFixed(0).replace('.', ',')
+          return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+          },
+
+          addProduct: function (card) {
             
             // console.log(JSON.stringify(card))
             
