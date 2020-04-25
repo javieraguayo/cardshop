@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row align-items-end">
+        <div class="row pr-3">
             <li><a href="#" id="cart" class="nav-link" data-toggle="modal" data-target="#modalcart"><i class="fa fa-shopping-cart" ></i> Carrito <span class="badge">{{totalAmount()}}</span></a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +34,7 @@
             };  
         },
         mounted() {
-            console.log('MenuComponent mounted.')
+        
             this.$root.$on('countproduct', products => {
             this.products = products;
 

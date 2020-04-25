@@ -1888,9 +1888,6 @@ __webpack_require__.r(__webpack_exports__);
 
       // console.log(JSON.stringify(card))
       axios.post('./Cart', card).then(function (response) {
-        // this.$emit('updatecart',card);
-        console.log('llego al then');
-
         _this.$root.$emit('updatecart', card);
       })["catch"](function (error) {})["finally"](function () {}); // $('.icon_btn_add').removeClass().addClass('fa fa-check animated zoomIn');
       // `this` inside methods points to the Vue instance
@@ -1939,9 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
       cards: []
     };
   },
-  mounted: function mounted() {
-    console.log('Component CartComponent.');
-  },
+  mounted: function mounted() {},
   methods: {
     formatPrice: function formatPrice(value) {
       var val = (value / 1).toFixed(0).replace('.', ',');
@@ -2002,6 +1997,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.getAllData();
     this.$root.$on('updatecart', function (card) {
+      //no recomendado para apps grandes
       _this.getAllData(); // console.log(card);
 
     });
@@ -2145,7 +2141,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log('MenuComponent mounted.');
     this.$root.$on('countproduct', function (products) {
       _this.products = products;
     });
@@ -6715,7 +6710,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*css icon zoom img*/\n.img {\r\n    position: relative;\r\n    display: inline-block; /* added */\r\n    overflow: hidden; /* added */\n}\n.img img:hover {\r\n    \r\n    opacity: 0.5;\n}\n.img:hover a {\r\n    opacity: 0.5; /* added */\r\n    top: 0; /* added */\r\n    z-index: 500;\r\n    background-color: #e6e6e6;\n}\r\n/* added */\n.img:hover a span {\r\n    top: 50%;\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    -webkit-transform: translateY(-50%);\r\n            transform: translateY(-50%);\n}\r\n/* added */\n.img a {\r\n    display: block;\r\n    position: absolute;\r\n    top: -100%;\r\n    opacity: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    text-align: center;\r\n    color: inherit;\n}\r\n/* end css icon zoom img*/\r\n", ""]);
 
 // exports
 
@@ -38504,7 +38499,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row align-items-end" }, [
+    _c("div", { staticClass: "row pr-3" }, [
       _c("li", [
         _c(
           "a",

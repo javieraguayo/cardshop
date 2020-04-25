@@ -43,7 +43,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {   
-
+        
         $producto = new Product();
         $producto->name = $request->name;
         $producto->price = $request->price;
