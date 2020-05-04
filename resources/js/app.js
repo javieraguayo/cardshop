@@ -4,9 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
+import router from './routes'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+Vue.use(Vuetify);
+
+
+
 
 window.Vue = require('vue');
+window.axios = require('axios');
 
 /**
  * The following block of code may be used to automatically register your
@@ -35,9 +43,13 @@ Vue.component('menu-auth-component', require('./components/MenuAuth.vue').defaul
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import router from './routes'
 
 const app = new Vue({
     el: '#app',
-    router
+    vuetify: new Vuetify(),
 });
+
+// const app = new Vue({
+//     el: '#app',
+//     router
+// });

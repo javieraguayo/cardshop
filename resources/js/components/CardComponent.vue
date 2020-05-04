@@ -18,6 +18,7 @@
             <p class="card-text">Descripcion</p>
             <strong class="card-text">${{ formatPrice(card.price) }}</strong>
             <hr>
+            
             <button class="btn btn-primary mt-auto" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
             <!-- <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Favoritos</a> -->
           </div>

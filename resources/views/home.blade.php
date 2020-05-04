@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     
-    <general-list-component></general-list-component>		    
+    <general-list-component></general-list-component>
+    <example-component></example-component>		    
 </div>
 
 <!-- Modal Cart-->
@@ -21,6 +22,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success">Comprobar y Pagar</button>
+
+        <button type="button" class="btn btn-success">Comprobar y Pagar</button>
+        
+         <div class="text-center">
+            <v-btn rounded color="primary" dark>Rounded Button</v-btn>
+        </div>
+      
       </div>
     </div>
   </div>
