@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+   
     
-    <general-list-component></general-list-component>
-    <example-component></example-component>		    
-</div>
 
 <!-- Modal Cart-->
-<div class="modal fade" id="modalcart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+{{-- <div class="modal fade" id="modalcart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -32,6 +30,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 <!-- Modal -->
 @endsection

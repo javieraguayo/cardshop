@@ -3,13 +3,16 @@
     <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
-      app>
+
+      app
+    >
       <v-list dense>
         <template v-for="item in items">
           <v-row
             v-if="item.heading"
             :key="item.heading"
-            align="center">
+            align="center"
+          >
             <v-col cols="6">
               <v-subheader v-if="item.heading">
                 {{ item.heading }}
@@ -17,7 +20,8 @@
             </v-col>
             <v-col
               cols="6"
-              class="text-center">
+              class="text-center"
+            >
               <a
                 href="#!"
                 class="body-2 black--text"
@@ -29,7 +33,8 @@
             :key="item.text"
             v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
-            append-icon="">
+            append-icon=""
+          >
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>
@@ -102,17 +107,23 @@
         icon
         large
       >
-        <v-avatar
-          size="32px"
-          item
-        >
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          /></v-avatar>
+         <v-avatar color="indigo" size="32px" item>
+      <v-icon dark>mdi-account-circle</v-icon>
+    </v-avatar>
       </v-btn>
+    <!--   <menu-auth-component ></menu-auth-component> -->
     </v-app-bar>
-    
+    <v-content>
+      <v-container
+        class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-app>
+          <carousel-home-component></carousel-home-component>
+          <general-list-component></general-list-component>
+          </v-app>
+        </v-row>
+      </v-container>
+    </v-content>
     <v-btn
       bottom
       color="pink"
@@ -252,3 +263,8 @@
     }),
   }
 </script>
+
+
+
+
+

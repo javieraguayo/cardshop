@@ -8,9 +8,21 @@
 import router from './routes'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-Vue.use(Vuetify);
+import 'vuetify/dist/vuetify.min.css'
 
 
+
+Vue.use(Vuetify)
+
+/**
+   primary: #00bcd4,
+      secondary: #607d8b,
+      accent: #cddc39,
+      error: #f44336,
+      warning: #ffc107,
+      info: #03a9f4,
+      success: #4caf50 
+*/
 
 
 window.Vue = require('vue');
@@ -27,7 +39,7 @@ window.axios = require('axios');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('toolbar-component', require('./components/Toolbar.vue').default);
 //cart carrito de compra table
 Vue.component('cartgeneral-component', require('./components/CartGeneralComponent.vue').default);
 //card carta 
@@ -38,6 +50,8 @@ Vue.component('general-list-component', require('./components/GeneralCardListCom
 Vue.component('cart-component', require('./components/CartComponent.vue').default);
 //Menu logout y carro btn show cart
 Vue.component('menu-auth-component', require('./components/MenuAuth.vue').default);
+//component carousel home
+Vue.component('carousel-home-component', require('./components/CarouselHomeComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -46,7 +60,7 @@ Vue.component('menu-auth-component', require('./components/MenuAuth.vue').defaul
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify()
 });
 
 // const app = new Vue({

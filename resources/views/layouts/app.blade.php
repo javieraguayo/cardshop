@@ -14,9 +14,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,9 +34,11 @@
         }
     </style>
 </head>
-<body style="padding-top: 60px;">
-    <div id="app"><!-- navbar-expand-md-->
-        <nav class="navbar navbar-expand fixed-top navbar-light bg-white shadow-sm">
+<body>
+    <div id="app">
+     <toolbar-component></toolbar-component>
+        <!-- navbar-expand-md-->
+        {{-- <nav class="navbar navbar-expand fixed-top navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'CartShop') }}
@@ -75,11 +75,12 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+         
+      {{--   <main class="py-4">
+            
+        </main> --}}
     </div>
 </body>
 </html>

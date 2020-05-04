@@ -1,29 +1,77 @@
 <!-- Componente de la carta-->
 <template>
     
-       <div class="card px-3 py-3" style="width: 18rem;">
+      <!--  <div class="card px-3 py-3" style="width: 18rem;">
           <div  class="img">
             <img :src="card.url_img" class="card-img-top animated zoomIn" alt="..." >
             <a><span class="fas fa-search-plus fa-5x text-secondary"></span></a>
-          </div>
+          </div> -->
           <!-- //alinear botones a multiples pantallas
              You can use the following Bootstrap 4 modifier classes:
              Add d-flex to .card-body
              Add flex-column to .card-body
              Add mt-auto to .btn nested in .card-body
             -->
-          
+      <!--     
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ card.name }}</h5>
             <p class="card-text">Descripcion</p>
             <strong class="card-text">${{ formatPrice(card.price) }}</strong>
             <hr>
             
-            <button class="btn btn-primary mt-auto" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button>
+            <button class="btn btn-primary mt-auto" v-on:click="addProduct(card)"><i class="fas fa-plus icon_btn_add"></i> Agregar</button> -->
             <!-- <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Favoritos</a> -->
-          </div>
-        </div>
+          <!-- </div>
+        </div> -->
 
+
+
+  
+  <v-row>
+    
+  <v-card hover>
+    <v-responsive :aspect-ratio="16/9">
+    <v-img
+      class="white--text"
+      :src="card.url_img">
+      <template v-slot:placeholder>
+                      <v-layout
+                        fill-height
+                        align-center
+                        justify-center
+                        ma-0>
+                      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                      </v-layout>
+                    </template>
+      <!-- <v-card-title>{{ card.name }}</v-card-title> -->
+
+    </v-img>
+
+    <!-- <v-card-subtitle class="pb-0">Number 10</v-card-subtitle> -->
+
+    <v-card-text class="text--primary">
+      <div>{{ card.name }}</div>
+
+      <div>Whitsunday Island, Whitsunday Islands</div>
+    </v-card-text>
+
+    <v-card-actions>
+      <div class="text-center ma-2">
+        <v-btn rounded color="success"><span class="material-icons">add_shopping_cart</span>Añadir al Carrito</v-btn>
+      </div>
+      
+      <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn class="mx-2" fab dark small color="pink"  dark v-on="on"><v-icon dark>mdi-heart</v-icon></v-btn>
+      </template>
+      <span>Añadir a Favoritos</span>
+    </v-tooltip>
+    
+
+    </v-card-actions>
+  </v-responsive>
+  </v-card>
+ </v-row>
 </template>
 
 <script>
