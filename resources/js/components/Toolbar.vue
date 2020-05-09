@@ -3,16 +3,15 @@
     <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
-
-      app
-    >
+      bottom
+      temporary
+      app>
       <v-list dense>
         <template v-for="item in items">
           <v-row
             v-if="item.heading"
             :key="item.heading"
-            align="center"
-          >
+            align="center">
             <v-col cols="6">
               <v-subheader v-if="item.heading">
                 {{ item.heading }}
@@ -20,12 +19,8 @@
             </v-col>
             <v-col
               cols="6"
-              class="text-center"
-            >
-              <a
-                href="#!"
-                class="body-2 black--text"
-              >EDIT</a>
+              class="text-center">
+              <a href="#!" class="body-2 black--text">EDIT</a>
             </v-col>
           </v-row>
           <v-list-group
@@ -33,8 +28,7 @@
             :key="item.text"
             v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
-            append-icon=""
-          >
+            append-icon="">
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>
@@ -45,8 +39,7 @@
             <v-list-item
               v-for="(child, i) in item.children"
               :key="i"
-              link
-            >
+              link>
               <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
@@ -101,122 +94,39 @@
         <v-icon>mdi-apps</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
+        <span class="material-icons">shopping_cart</span>
       </v-btn>
-      <v-btn
-        icon
-        large
-      >
-         <v-avatar color="indigo" size="32px" item>
-      <v-icon dark>mdi-account-circle</v-icon>
-    </v-avatar>
-      </v-btn>
+  <v-menu
+      bottom
+      origin="center center"
+      transition="scale-transition">
+      <template v-slot:activator="{ on }">
+        <v-btn
+         icon
+         large
+          v-on="on">
+          <v-icon dark>mdi-account-circle</v-icon>
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item>
+          <v-list-item-title @click="logout">Salir</v-list-item-title>
+        </v-list-item>
+      </v-list>
+  </v-menu>
     <!--   <menu-auth-component ></menu-auth-component> -->
     </v-app-bar>
     <v-content>
-      <v-container
-        class="fill-height" fluid>
-        <v-row align="center" justify="center">
+      <v-container>
+        <v-row>
           <v-app>
-          <carousel-home-component></carousel-home-component>
-          <general-list-component></general-list-component>
+         <!-- <carousel-home-component></carousel-home-component> -->
+          <general-list-component></general-list-component> 
           </v-app>
         </v-row>
       </v-container>
     </v-content>
-    <v-btn
-      bottom
-      color="pink"
-      dark
-      fab
-      fixed
-      right
-      @click="dialog = !dialog"
-    >
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
-    <v-dialog
-      v-model="dialog"
-      width="800px"
-    >
-      <v-card>
-        <v-card-title class="grey darken-2">
-          Create contact
-        </v-card-title>
-        <v-container>
-          <v-row class="mx-2">
-            <v-col
-              class="align-center justify-space-between"
-              cols="12"
-            >
-              <v-row
-                align="center"
-                class="mr-0"
-              >
-                <v-avatar
-                  size="40px"
-                  class="mx-3"
-                >
-                  <img
-                    src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
-                    alt=""
-                  >
-                </v-avatar>
-                <v-text-field
-                  placeholder="Name"
-                />
-              </v-row>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                prepend-icon="mdi-account-card-details-outline"
-                placeholder="Company"
-              />
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                placeholder="Job title"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                prepend-icon="mdi-mail"
-                placeholder="Email"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                type="tel"
-                prepend-icon="mdi-phone"
-                placeholder="(000) 000 - 0000"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                prepend-icon="mdi-text"
-                placeholder="Notes"
-              />
-            </v-col>
-          </v-row>
-        </v-container>
-        <v-card-actions>
-          <v-btn
-            text
-            color="primary"
-          >More</v-btn>
-          <v-spacer />
-          <v-btn
-            text
-            color="primary"
-            @click="dialog = false"
-          >Cancel</v-btn>
-          <v-btn
-            text
-            @click="dialog = false"
-          >Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-app>
 </template>
 
@@ -261,6 +171,20 @@
         { icon: 'mdi-keyboard', text: 'Go to the old version' },
       ],
     }),
+    methods: {
+      logout:function(){
+               axios.post('./logout').then(response => {
+                  if (response.status === 302 || 401) {
+                        window.location.href = './login';
+                  }
+                  else {
+                    // throw error and go to catch block
+                  }
+                }).catch(error => {
+
+              });
+        }
+    },
   }
 </script>
 

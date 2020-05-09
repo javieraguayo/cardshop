@@ -52,6 +52,8 @@ Vue.component('cart-component', require('./components/CartComponent.vue').defaul
 Vue.component('menu-auth-component', require('./components/MenuAuth.vue').default);
 //component carousel home
 Vue.component('carousel-home-component', require('./components/CarouselHomeComponent.vue').default);
+//componente login 
+Vue.component('login-component', require('./components/LoginComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -60,7 +62,8 @@ Vue.component('carousel-home-component', require('./components/CarouselHomeCompo
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify()
+    vuetify: new Vuetify(),
+    router
 });
 
 // const app = new Vue({
